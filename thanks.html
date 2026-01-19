@@ -1,15 +1,74 @@
+<!DOCTYPE html>
 <html lang="fr">
 
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Message envoyé - Portfolio Auréol Mihinhayi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/global.css">
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+      color: #fff;
+      text-align: center;
+      padding: 2rem;
+    }
+    
+    .thanks-container {
+      max-width: 600px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 4rem;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+    
+    h1 {
+      color: #fff;
+      font-size: 3.6rem;
+      margin-bottom: 2rem;
+    }
+    
+    p {
+      font-size: 1.8rem;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 3rem;
+    }
+    
+    .btn {
+      display: inline-block;
+      padding: 1.5rem 3rem;
+      background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+    }
+    
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.6);
+    }
+  </style>
 </head>
 
 <body>
-  <h1>Merci pour votre message</h1>
-  <p>Nous vous recontacterons bientôt</p>
+  <div class="thanks-container">
+    <h1>✓ Message envoyé !</h1>
+    <p>Merci pour votre message. Je vous recontacterai très bientôt.</p>
+    <a href="./index.html" class="btn">Retour au portfolio</a>
+  </div>
 </body>
 
 </html>
