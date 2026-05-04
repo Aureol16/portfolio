@@ -93,6 +93,44 @@
       box-shadow: var(--shadow-md);
       background: rgba(15, 23, 42, 0.4);
     }
+
+    .project-docs {
+      margin-top: 1.75rem;
+      padding-top: 1.75rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .project-docs h3 {
+      margin: 0 0 1rem;
+      font-size: 1.65rem;
+      color: var(--text-heading);
+    }
+
+    .project-docs__item {
+      margin-bottom: 1.25rem;
+    }
+
+    .project-docs__item:last-child {
+      margin-bottom: 0;
+    }
+
+    .project-docs__item strong {
+      display: block;
+      margin-bottom: 0.6rem;
+      font-size: 1.35rem;
+      color: var(--color-body);
+    }
+
+    .project-docs__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .project-docs__actions .btn {
+      margin: 0;
+    }
   </style>
 </head>
 <body>
@@ -108,6 +146,7 @@
         <article class="project-card">
           <h2>Description</h2>
           <p id="project-description"></p>
+          <div class="project-docs" id="project-docs" hidden></div>
         </article>
 
         <article class="project-card">
@@ -156,6 +195,10 @@
           "./img/ecommerce/ecom-funnel-conversion.png",
           "./img/ecommerce/ecom-heatmap-heure-jour.png",
           "./img/ecommerce/ecom-meilleurs-produits.png"
+        ],
+        documents: [
+          { title: "Rapport d'analyse", file: "./assets/rapport-analyse.pdf" },
+          { title: "Présentation", file: "./assets/presentation-1.pdf" }
         ]
       },
       "homedoc-web": {
@@ -249,6 +292,7 @@
 
     const head = document.getElementById("project-head");
     const description = document.getElementById("project-description");
+    const docsEl = document.getElementById("project-docs");
     const tech = document.getElementById("project-tech");
     const skills = document.getElementById("project-skills");
     const gallery = document.getElementById("project-gallery");
@@ -266,6 +310,27 @@
         </div>
       `;
       description.textContent = project.description;
+
+      if (project.documents && project.documents.length) {
+        docsEl.hidden = false;
+        docsEl.innerHTML =
+          "<h3>Documents (PDF)</h3>" +
+          project.documents
+            .map((doc) => {
+              const href = encodeURI(doc.file);
+              return `<div class="project-docs__item">
+            <strong>${doc.title}</strong>
+            <div class="project-docs__actions">
+              <a class="btn btn--primary btn--sm" href="${href}" download>Télécharger</a>
+              <a class="btn btn--ghost btn--sm" href="${href}" target="_blank" rel="noopener noreferrer">Voir</a>
+            </div>
+          </div>`;
+            })
+            .join("");
+      } else {
+        docsEl.hidden = true;
+        docsEl.innerHTML = "";
+      }
 
       tech.innerHTML = project.tech.map((item) => `<li>${item}</li>`).join("");
       skills.innerHTML = project.skills.map((item) => `<li>${item}</li>`).join("");
