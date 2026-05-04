@@ -5,6 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Détail projet | Auréol Mihinhayi</title>
   <link rel="stylesheet" href="./css/global.css">
+  <script>
+    (function () {
+      try {
+        var id = new URLSearchParams(window.location.search).get("id");
+        if (id === "ecommerce-dashboard") {
+          document.documentElement.classList.add("is-ecommerce-project");
+        }
+      } catch (e) {}
+    })();
+  </script>
   <style>
     .project-page {
       min-height: 100vh;
@@ -131,6 +141,15 @@
     .project-docs__actions .btn {
       margin: 0;
     }
+
+    /* PDF e-commerce : affichage fiable même si le script du bas échoue */
+    .project-docs--static-ecommerce {
+      display: none;
+    }
+
+    html.is-ecommerce-project .project-docs--static-ecommerce {
+      display: block;
+    }
   </style>
 </head>
 <body>
@@ -146,6 +165,23 @@
         <article class="project-card">
           <h2>Description</h2>
           <p id="project-description"></p>
+          <div class="project-docs project-docs--static-ecommerce" aria-label="Documents PDF — Performance e-commerce">
+            <h3>Documents (PDF)</h3>
+            <div class="project-docs__item">
+              <strong>Rapport d'analyse</strong>
+              <div class="project-docs__actions">
+                <a class="btn btn--primary btn--sm" href="./assets/rapport-analyse.pdf" download>Télécharger</a>
+                <a class="btn btn--ghost btn--sm" href="./assets/rapport-analyse.pdf" target="_blank" rel="noopener noreferrer">Voir</a>
+              </div>
+            </div>
+            <div class="project-docs__item">
+              <strong>Présentation</strong>
+              <div class="project-docs__actions">
+                <a class="btn btn--primary btn--sm" href="./assets/presentation-1.pdf" download>Télécharger</a>
+                <a class="btn btn--ghost btn--sm" href="./assets/presentation-1.pdf" target="_blank" rel="noopener noreferrer">Voir</a>
+              </div>
+            </div>
+          </div>
           <div class="project-docs" id="project-docs" hidden></div>
         </article>
 
@@ -195,10 +231,6 @@
           "./img/ecommerce/ecom-funnel-conversion.png",
           "./img/ecommerce/ecom-heatmap-heure-jour.png",
           "./img/ecommerce/ecom-meilleurs-produits.png"
-        ],
-        documents: [
-          { title: "Rapport d'analyse", file: "./assets/rapport-analyse.pdf" },
-          { title: "Présentation", file: "./assets/presentation-1.pdf" }
         ]
       },
       "homedoc-web": {
@@ -299,6 +331,10 @@
 
     if (!project) {
       head.innerHTML = "<h1>Projet introuvable</h1><p>Le lien ne correspond à aucun projet. Retournez au portfolio pour sélectionner un projet valide.</p>";
+      if (docsEl) {
+        docsEl.setAttribute("hidden", "");
+        docsEl.innerHTML = "";
+      }
     } else {
       document.title = project.title + " | Projet";
       head.innerHTML = `
@@ -312,14 +348,16 @@
       description.textContent = project.description;
 
       if (project.documents && project.documents.length) {
-        docsEl.hidden = false;
+        docsEl.removeAttribute("hidden");
+        docsEl.style.display = "block";
         docsEl.innerHTML =
           "<h3>Documents (PDF)</h3>" +
           project.documents
             .map((doc) => {
               const href = encodeURI(doc.file);
+              const title = String(doc.title).replace(/</g, "&lt;").replace(/>/g, "&gt;");
               return `<div class="project-docs__item">
-            <strong>${doc.title}</strong>
+            <strong>${title}</strong>
             <div class="project-docs__actions">
               <a class="btn btn--primary btn--sm" href="${href}" download>Télécharger</a>
               <a class="btn btn--ghost btn--sm" href="${href}" target="_blank" rel="noopener noreferrer">Voir</a>
@@ -328,7 +366,8 @@
             })
             .join("");
       } else {
-        docsEl.hidden = true;
+        docsEl.setAttribute("hidden", "");
+        docsEl.style.display = "";
         docsEl.innerHTML = "";
       }
 
