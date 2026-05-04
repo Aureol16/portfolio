@@ -128,6 +128,8 @@ function menuMobile() {
   const header = document.querySelector('.header');
   const links = document.querySelectorAll('.navbar a');
 
+  if (!btn || !header) return;
+
   btn.addEventListener('click', () => {
     header.classList.toggle('show-nav');
   });
@@ -265,6 +267,9 @@ const observerIntersectionAnimation = () => {
   const header = document.querySelector('.header');
 
   const skipSectionFade = new Set(['about', 'cv', 'cv-strip']);
+  // Pas de transform sur #portfolio : les .modal en fixed seraient ancées à la section
+  // (min-height 100vh sur .modal__content gonflait alors tout le défilement de la page).
+  const skipSectionTransform = new Set(['portfolio']);
 
   // Animation des sections (évite de masquer #about / #cv : contenu restait invisible)
   sections.forEach((section, index) => {
@@ -272,6 +277,7 @@ const observerIntersectionAnimation = () => {
     if (section.id && skipSectionFade.has(section.id)) return;
     section.style.opacity = "0";
     section.style.transition = "all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
+    if (section.id && skipSectionTransform.has(section.id)) return;
     section.style.transform = "translateY(50px)";
   });
 
@@ -308,7 +314,9 @@ const observerIntersectionAnimation = () => {
       if (entry.isIntersecting) {
         let elem = entry.target;
         elem.style.opacity = "1";
-        elem.style.transform = "translateY(0)";
+        if (!(elem.id && skipSectionTransform.has(elem.id))) {
+          elem.style.transform = "translateY(0)";
+        }
       }
     });
   }, {
@@ -437,5 +445,47 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 300);
   });
 });
+
+/* Thème clair / sombre — interrupteur (sombre par défaut) */
+function initThemeToggle() {
+  const switches = document.querySelectorAll('[data-theme-toggle]');
+  const root = document.documentElement;
+
+  const isLight = () => root.getAttribute('data-theme') === 'light';
+
+  const syncSwitches = (light) => {
+    switches.forEach((el) => {
+      el.setAttribute('aria-checked', light ? 'true' : 'false');
+      el.setAttribute('aria-label', light ? 'Passer en mode sombre' : 'Passer en mode clair');
+    });
+  };
+
+  const apply = (light) => {
+    if (light) {
+      root.setAttribute('data-theme', 'light');
+      try {
+        localStorage.setItem('portfolio-theme', 'light');
+      } catch (e) {}
+    } else {
+      root.removeAttribute('data-theme');
+      try {
+        localStorage.setItem('portfolio-theme', 'dark');
+      } catch (e) {}
+    }
+    syncSwitches(light);
+  };
+
+  switches.forEach((el) => {
+    el.addEventListener('click', () => apply(!isLight()));
+  });
+
+  try {
+    apply(localStorage.getItem('portfolio-theme') === 'light');
+  } catch (e) {
+    apply(isLight());
+  }
+}
+
+initThemeToggle();
 
 

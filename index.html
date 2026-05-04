@@ -4,6 +4,15 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("portfolio-theme") === "light") {
+          document.documentElement.setAttribute("data-theme", "light");
+        }
+      } catch (e) {}
+    })();
+  </script>
   <title>Auréol Mihinhayi — Full Stack, Data &amp; IA | Portfolio</title>
   <meta name="description" content="Portfolio d'Auréol Mihinhayi : développement web full stack, applications mobiles, analyse de données, visualisation et parcours en intelligence artificielle.">
   <link rel="shortcut icon" href="./img/favicon.ico?v=1" type="image/x-icon">
@@ -57,6 +66,17 @@
             </a>
           </li>
         </ul>
+        <div class="header__theme">
+          <button type="button" class="theme-switch" data-theme-toggle role="switch" aria-checked="false" aria-label="Passer en mode clair">
+            <svg class="theme-switch__glyph theme-switch__glyph--moon" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path fill="currentColor" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+            <span class="theme-switch__track" aria-hidden="true"><span class="theme-switch__thumb"></span></span>
+            <svg class="theme-switch__glyph theme-switch__glyph--sun" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path fill="currentColor" d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.51 4.93l2.12 2.12-1.41 1.41L2.1 6.34l1.41-1.41zm14.85 14.85 2.12 2.12-1.41 1.41-2.12-2.12 1.41-1.41zM1 13v-2h3v2H1zm19 0v-2h3v2h-3zM6.34 21.9l-1.41-1.41 2.12-2.12 1.41 1.41-2.12 2.12zm12.73-16.55-1.41 1.41-2.12-2.12 1.41-1.41 2.12 2.12z"/>
+            </svg>
+          </button>
+        </div>
         <button class="burger"><span class="bar"></span></button>
       </div>
     </div>
