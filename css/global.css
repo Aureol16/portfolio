@@ -1001,6 +1001,30 @@ section {
   background: var(--background-light);
 }
 
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media screen and (min-width: 700px) {
+  .services-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media screen and (min-width: 1050px) {
+  .services-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.services .services-grid .service {
+  margin-bottom: 0;
+  height: 100%;
+  box-sizing: border-box;
+}
+
 .service {
   background: var(--surface-card);
   padding: 3rem;
@@ -1318,6 +1342,36 @@ section {
   transform: translateX(5px);
 }
 
+.experience-item--languages {
+  margin-bottom: 2.5rem;
+  padding: 2rem 2.5rem;
+}
+
+.experience-item--languages h3 {
+  font-size: 1.65rem;
+  margin-bottom: 1rem;
+}
+
+.experience-lang-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 2.5rem;
+}
+
+.experience-lang-list li {
+  padding-left: 0;
+  margin-bottom: 0;
+  color: var(--color-body-light);
+}
+
+.experience-lang-list li::before {
+  display: none;
+}
+
+.experience-lang-list li:hover {
+  transform: none;
+}
+
 /* Formation Section */
 .formation {
   background: var(--background-light);
@@ -1477,6 +1531,12 @@ section {
   object-position: center;
   border-radius: 12px 12px 0 0;
   transition: all 0.5s ease;
+}
+
+.portfolio-image[src$=".svg"] {
+  object-fit: cover;
+  object-position: center top;
+  background: var(--surface-card);
 }
 
 /* Cartes « rapport PDF » (sans capture d’écran) */
@@ -1641,6 +1701,7 @@ section {
   left: 0;
   opacity: 1;
   visibility: visible;
+  display: block;
 }
 
 .modal__content {

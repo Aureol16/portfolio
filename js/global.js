@@ -195,28 +195,58 @@ function showProjectDetails() {
   const btns = document.querySelectorAll('.modal__close');
 
   const hideModals = () => {
-    modals.forEach(modal => {
+    modals.forEach((modal) => {
       modal.classList.remove('show');
     });
-  }
+    document.body.style.overflow = '';
+  };
 
-  links.forEach(elem => {
+  links.forEach((elem) => {
     elem.addEventListener('click', (event) => {
       event.preventDefault();
       const modal = document.getElementById(elem.dataset.id);
-      if (modal) modal.classList.add('show');
+      if (modal) {
+        modal.classList.add('show');
+        document.body.style.overflow = 'hidden';
+      }
     });
   });
 
-  btns.forEach(btn => {
+  btns.forEach((btn) => {
     btn.addEventListener('click', (event) => {
+      event.preventDefault();
       hideModals();
     });
   });
 
+  modals.forEach((modal) => {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) hideModals();
+    });
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') hideModals();
+  });
 }
 
 showProjectDetails();
+
+// Activer .animate-on-scroll (sinon le contenu reste à opacity: 0)
+document.querySelectorAll('.animate-on-scroll').forEach((el) => {
+  const io = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animated');
+          obs.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+  );
+  io.observe(el);
+});
 
 // Effets d'animation au scroll - Enhanced
 const observerIntersectionAnimation = () => {
