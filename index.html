@@ -64,14 +64,14 @@
 
  <section id="hero" class="hero">
   <div class="hero__bg" aria-hidden="true">
+    <div class="hero__photo"></div>
     <div class="hero__orb hero__orb--1"></div>
     <div class="hero__orb hero__orb--2"></div>
     <div class="hero__grid"></div>
   </div>
   <div class="container">
-    <div class="grid">
-      
-      <div class="hero__item left">
+    <div class="grid hero__grid-main">
+      <div class="hero__item hero__item--main">
         <span>Full Stack · Data · UX/UI</span>
         <h1 class="title">Hello, je suis <strong>Auréol Mihinhayi</strong></h1>
         <p>
@@ -82,19 +82,6 @@
           <a href="./assets/CV-Aureol-Mihinhayi.pdf" class="btn btn--ghost" download>Télécharger mon CV</a>
         </div>
       </div>
-
-      <div class="hero__item right">
-        <div class="hero__avatar">
-          <img 
-            src="./img/codeur.jpg"
-            width="400"
-            height="400"
-            loading="lazy"
-            alt="Auréol Mihinhayi – Développeur web, mobile et data"
-          >
-        </div>
-      </div>
-
     </div>
   </div>
 </section>
@@ -115,11 +102,11 @@
   <section id="about" class="about">
     <div class="container">
       <div class="grid">
-        <div class="grid__item animate-on-scroll fade-in-left">
+        <div class="grid__item">
           <img src="./img/aureol-portrait.jpg" width="560" height="453" loading="lazy"
             alt="Auréol Mihinhayi - Développeur web, mobile et data">
         </div>
-        <div class="grid__item animate-on-scroll fade-in-right">
+        <div class="grid__item">
           <h2 class="section-title">À propos</h2>
           <h3>Qui suis-je</h3>
           <p>
@@ -597,10 +584,9 @@
     <div class="container">
       <div class="section-header">
         <h2 class="section-title">Portfolio</h2>
-<p>
-          Réalisations concrètes : contexte, rôle, technologies et aperçus. Cliquez sur une carte pour le détail.
+        <p>
+          Projets réalisés : résumé, stack technique et visuels. Utilisez les filtres ou ouvrez le détail pour la description complète.
         </p>
-
       </div>
       <ul class="grid portfolio-filters list-unstyled">
         <li class="grid__item">
@@ -619,17 +605,19 @@
           <a href="#" data-filter="app">Applications</a>
         </li>
       </ul>
-      <div class="grid">
-        <div class="grid__item animate-on-scroll fade-in-up">
-          <div class="card" data-category="data">
+      <div class="portfolio-list">
+        <div class="grid__item portfolio-item animate-on-scroll fade-in-up">
+          <div class="card card--row" data-category="data">
             <img src="./img/01_volume_par_annee.png" loading="lazy" width="365" height="243"
-              alt="Visualisation du volume de contenus par année" class="card__image portfolio-image">
+              alt="Visualisation du volume de contenus par année" class="card__image portfolio-image card__thumb">
             <div class="card__inner">
               <h3 class="card__title">EDA — Catalogue streaming</h3>
               <p class="category">Data &amp; visualisation</p>
-            </div>
-            <div class="card__overlay">
-              <a href="#" class="card__link" data-id="modal-data-catalog">+</a>
+              <p class="card__excerpt">Exploration d’un catalogue type streaming : volumes temporels, répartition des contenus, genres et heatmap de complétude des données.</p>
+              <ul class="card__tags" aria-label="Technologies">
+                <li>Python</li><li>Pandas</li><li>Matplotlib</li><li>Seaborn</li><li>Jupyter</li>
+              </ul>
+              <a href="#" class="card__link btn btn--primary btn--sm" data-id="modal-data-catalog">Voir le projet</a>
             </div>
           </div>
           <div class="modal" id="modal-data-catalog">
@@ -670,16 +658,18 @@
             </div>
           </div>
         </div>
-        <div class="grid__item animate-on-scroll fade-in-up">
-          <div class="card" data-category="data">
+        <div class="grid__item portfolio-item animate-on-scroll fade-in-up">
+          <div class="card card--row" data-category="data">
             <img src="./img/ecommerce/ecom-tableau-de-bord-kpi.png" loading="lazy" width="365" height="243"
-              alt="Tableau de bord e-commerce avec KPI et filtres Streamlit" class="card__image portfolio-image">
+              alt="Tableau de bord e-commerce avec KPI et filtres Streamlit" class="card__image portfolio-image card__thumb">
             <div class="card__inner">
               <h3 class="card__title">Performance e-commerce</h3>
               <p class="category">Dashboard Streamlit · 2,7M+ événements</p>
-            </div>
-            <div class="card__overlay">
-              <a href="#" class="card__link" data-id="modal-ecommerce-dashboard">+</a>
+              <p class="card__excerpt">Tableau de bord interactif : KPI, funnel de conversion, tendances temporelles, top produits et analyse du comportement utilisateur.</p>
+              <ul class="card__tags" aria-label="Technologies">
+                <li>Python</li><li>Pandas</li><li>Streamlit</li><li>Plotly</li>
+              </ul>
+              <a href="#" class="card__link btn btn--primary btn--sm" data-id="modal-ecommerce-dashboard">Voir le projet</a>
             </div>
           </div>
           <div class="modal" id="modal-ecommerce-dashboard">
@@ -733,16 +723,18 @@
             </div>
           </div>
         </div>
-        <div class="grid__item animate-on-scroll fade-in-up">
-          <div class="card" data-category="web">
+        <div class="grid__item portfolio-item animate-on-scroll fade-in-up">
+          <div class="card card--row" data-category="web">
             <img src="./img/homedocweb1.png" loading="lazy" width="365" height="243"
-              alt="projet de la ville" class="card__image portfolio-image">
+              alt="projet de la ville" class="card__image portfolio-image card__thumb">
             <div class="card__inner">
               <h3 class="card__title">HOMEDOCWEB</h3>
               <p class="category">Développement Web</p>
-            </div>
-            <div class="card__overlay">
-              <a href="#" class="card__link" data-id="modal-1">+</a>
+              <p class="card__excerpt">Plateforme web métiers : tableaux de bord, gestion et interface pour le projet HomeDoc (front, back et API).</p>
+              <ul class="card__tags" aria-label="Technologies">
+                <li>HTML</li><li>CSS</li><li>JavaScript</li><li>PHP</li><li>MySQL</li><li>API REST</li>
+              </ul>
+              <a href="#" class="card__link btn btn--primary btn--sm" data-id="modal-1">Voir le projet</a>
             </div>
           </div>
           <div class="modal" id="modal-1">
@@ -814,25 +806,26 @@
             </div>
           </div>
         </div>
-   <div class="grid__item">
+   <div class="grid__item portfolio-item animate-on-scroll fade-in-up">
   <!-- Carte projet -->
-  <div class="card" data-category="design">
+  <div class="card card--row" data-category="design">
     <img
       src="./img/cbace-1.svg"
       loading="lazy"
       width="365"
       height="243"
       alt="Refonte graphique du site CBACE-CGA — aperçu"
-      class="card__image portfolio-image"
+      class="card__image portfolio-image card__thumb"
     />
 
     <div class="card__inner">
       <h3 class="card__title">CBACE-CGA</h3>
       <p class="category">Refonte graphique & Web</p>
-    </div>
-
-    <div class="card__overlay">
-      <a href="#" class="card__link" data-id="modal-cbace">+</a>
+      <p class="card__excerpt">Refonte du site du cabinet CBACE-CGA : identité visuelle, UX/UI et site responsive sous WordPress.</p>
+      <ul class="card__tags" aria-label="Technologies">
+        <li>HTML5</li><li>CSS3</li><li>JavaScript</li><li>WordPress</li><li>UI</li>
+      </ul>
+      <a href="#" class="card__link btn btn--primary btn--sm" data-id="modal-cbace">Voir le projet</a>
     </div>
   </div>
 
@@ -896,25 +889,26 @@
   </div>
 </div>
 
-        <div class="grid__item">
+        <div class="grid__item portfolio-item animate-on-scroll fade-in-up">
   <!-- Carte projet -->
-  <div class="card" data-category="app">
+  <div class="card card--row" data-category="app">
     <img
       src="./img/homedoc.png"
       loading="lazy"
       width="365"
       height="243"
       alt="Logo de l'application mobile HomeDoc"
-      class="card__image portfolio-image"
+      class="card__image portfolio-image card__thumb"
     />
 
     <div class="card__inner">
       <h3 class="card__title">HomeDoc</h3>
       <p class="category">Application mobile • Santé</p>
-    </div>
-
-    <div class="card__overlay">
-      <a href="#" class="card__link" data-id="modal-homedoc">+</a>
+      <p class="card__excerpt">Application de téléconsultation et suivi médical : compte patient, rendez-vous, ordonnances et notifications.</p>
+      <ul class="card__tags" aria-label="Technologies">
+        <li>Flutter</li><li>PHP</li><li>MySQL</li><li>API REST</li>
+      </ul>
+      <a href="#" class="card__link btn btn--primary btn--sm" data-id="modal-homedoc">Voir le projet</a>
     </div>
   </div>
 
@@ -1003,25 +997,26 @@
   </div>
 </div>
 
-  <div class="grid__item">
+  <div class="grid__item portfolio-item animate-on-scroll fade-in-up">
   <!-- Carte projet -->
-  <div class="card" data-category="web">
+  <div class="card card--row" data-category="web">
     <img
       src="./img/secca sarl2.png"
       loading="lazy"
       width="365"
       height="243"
       alt="Refonte du site Secca Sarl avec WordPress"
-      class="card__image portfolio-image"
+      class="card__image portfolio-image card__thumb"
     />
 
     <div class="card__inner">
       <h3 class="card__title">Refonte du site Secca Sarl</h3>
       <p class="category">Refonte graphique & Web</p>
-    </div>
-
-    <div class="card__overlay">
-      <a href="#" class="card__link" data-id="modal-secca">+</a>
+      <p class="card__excerpt">Modernisation du site WordPress : UX, responsive, performances et gestion de contenu.</p>
+      <ul class="card__tags" aria-label="Technologies">
+        <li>WordPress</li><li>HTML5</li><li>CSS3</li><li>JavaScript</li>
+      </ul>
+      <a href="#" class="card__link btn btn--primary btn--sm" data-id="modal-secca">Voir le projet</a>
     </div>
   </div>
 
@@ -1097,25 +1092,26 @@
   </div>
 </div>
 
-       <div class="grid__item">
+       <div class="grid__item portfolio-item animate-on-scroll fade-in-up">
   <!-- Carte projet -->
-  <div class="card" data-category="design">
+  <div class="card card--row" data-category="design">
     <img
       src="./img/maquettedrivease1.jpg"
       loading="lazy"
       width="365"
       height="243"
       alt="Maquette de l'application Drive Ease"
-      class="card__image portfolio-image"
+      class="card__image portfolio-image card__thumb"
     />
 
     <div class="card__inner">
       <h3 class="card__title">Drive Ease</h3>
       <p class="category">Maquette UI/UX • Application mobile</p>
-    </div>
-
-    <div class="card__overlay">
-      <a href="#" class="card__link" data-id="modal-drive-ease">+</a>
+      <p class="card__excerpt">Maquette Figma pour une app d’apprentissage et de préparation au permis : parcours clair et ergonomique.</p>
+      <ul class="card__tags" aria-label="Technologies">
+        <li>Figma</li><li>UI</li><li>UX</li><li>Prototype</li>
+      </ul>
+      <a href="#" class="card__link btn btn--primary btn--sm" data-id="modal-drive-ease">Voir le projet</a>
     </div>
   </div>
 
@@ -1193,25 +1189,26 @@
   </div>
 </div>
 
-        <div class="grid__item">
+        <div class="grid__item portfolio-item animate-on-scroll fade-in-up">
   <!-- Carte projet -->
-  <div class="card" data-category="app">
+  <div class="card card--row" data-category="app">
     <img
       src="./img/driveease1.png"
       loading="lazy"
       width="365"
       height="243"
       alt="Application mobile Drive Ease"
-      class="card__image portfolio-image"
+      class="card__image portfolio-image card__thumb"
     />
 
     <div class="card__inner">
       <h3 class="card__title">Drive Ease</h3>
       <p class="category">Application mobile</p>
-    </div>
-
-    <div class="card__overlay">
-      <a href="#" class="card__link" data-id="modal-drive-ease-app">+</a>
+      <p class="card__excerpt">Application mobile autour du code de la route : cours, tests blancs et suivi de progression.</p>
+      <ul class="card__tags" aria-label="Technologies">
+        <li>Flutter</li><li>Dart</li><li>Mobile</li>
+      </ul>
+      <a href="#" class="card__link btn btn--primary btn--sm" data-id="modal-drive-ease-app">Voir le projet</a>
     </div>
   </div>
 
@@ -1290,6 +1287,8 @@
   </div>
 </div>
 
+    </div>
+    </div>
   </section>
   <section id="contact" class="contact">
   <div class="container">

@@ -153,28 +153,21 @@ function tabsFilters() {
     })
   }
 
-  const showProjets = (elem) => {
-    projets.forEach(projet => {
+  const portfolioRow = (card) => card.closest('.portfolio-item') || card.parentNode;
 
-      let filter = projet.getAttribute('data-category');
+  const showProjets = (elem) => {
+    projets.forEach((projet) => {
+      const row = portfolioRow(projet);
+      const filter = projet.getAttribute('data-category');
 
       if (elem === 'all') {
-        projet.parentNode.classList.remove('hide');
-        return
+        row.classList.remove('hide');
+        return;
       }
 
-      // ne sera pas pris en compte !
-      /*if (filter !== elem) {
-        projet.parentNode.classList.add('hide');
-      } else {
-        projet.parentNode.classList.remove('hide');
-      }*/
-
-      // option pour les plus motivés - opérateur ternaire
-      filter !== elem ? projet.parentNode.classList.add('hide') : projet.parentNode.classList.remove('hide');
-
+      filter !== elem ? row.classList.add('hide') : row.classList.remove('hide');
     });
-  }
+  };
 
   tabs.forEach(elem => {
     elem.addEventListener('click', (event) => {
@@ -233,7 +226,18 @@ function showProjectDetails() {
 showProjectDetails();
 
 // Activer .animate-on-scroll (sinon le contenu reste à opacity: 0)
+const revealIfVisible = (el) => {
+  const r = el.getBoundingClientRect();
+  const vh = window.innerHeight || document.documentElement.clientHeight;
+  if (r.top < vh * 0.92 && r.bottom > 0) {
+    el.classList.add('animated');
+    return true;
+  }
+  return false;
+};
+
 document.querySelectorAll('.animate-on-scroll').forEach((el) => {
+  if (revealIfVisible(el)) return;
   const io = new IntersectionObserver(
     (entries, obs) => {
       entries.forEach((entry) => {
@@ -243,7 +247,7 @@ document.querySelectorAll('.animate-on-scroll').forEach((el) => {
         }
       });
     },
-    { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+    { threshold: 0.08, rootMargin: '0px 0px -20px 0px' }
   );
   io.observe(el);
 });
@@ -258,9 +262,12 @@ const observerIntersectionAnimation = () => {
   const formationItems = document.querySelectorAll('.formation-item');
   const header = document.querySelector('.header');
 
-  // Animation des sections
+  const skipSectionFade = new Set(['about', 'cv', 'cv-strip']);
+
+  // Animation des sections (évite de masquer #about / #cv : contenu restait invisible)
   sections.forEach((section, index) => {
     if (index === 0) return;
+    if (section.id && skipSectionFade.has(section.id)) return;
     section.style.opacity = "0";
     section.style.transition = "all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
     section.style.transform = "translateY(50px)";
