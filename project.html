@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Détail projet | Auréol Mihinhayi</title>
+  <link rel="stylesheet" href="./css/global.css">
+  <style>
+    .project-page {
+      min-height: 100vh;
+      background: var(--background-body);
+      color: var(--color-body);
+      padding: 3rem 0 5rem;
+    }
+
+    .project-shell {
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+
+    .project-back {
+      margin-bottom: 2rem;
+    }
+
+    .project-head {
+      background: var(--surface-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      box-shadow: var(--shadow-md);
+      padding: 2.4rem;
+      margin-bottom: 2rem;
+    }
+
+    .project-head h1 {
+      margin: 0 0 0.8rem;
+      color: var(--text-heading);
+      font-size: clamp(2.3rem, 4vw, 3.5rem);
+    }
+
+    .project-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 1rem;
+    }
+
+    .project-pill {
+      display: inline-block;
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      background: rgba(45, 212, 191, 0.15);
+      color: var(--color-primary);
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .project-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      box-shadow: var(--shadow-md);
+      padding: 2rem;
+    }
+
+    .project-card h2 {
+      margin-top: 0;
+      color: var(--text-heading);
+      font-size: 2rem;
+    }
+
+    .project-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .project-gallery img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+    }
+  </style>
+</head>
+<body>
+  <main class="project-page">
+    <div class="container project-shell">
+      <a class="btn btn--ghost project-back" href="./index.html#portfolio">← Retour au portfolio</a>
+
+      <section class="project-head" id="project-head">
+        <p>Chargement du projet...</p>
+      </section>
+
+      <section class="project-grid">
+        <article class="project-card">
+          <h2>Description</h2>
+          <p id="project-description"></p>
+        </article>
+
+        <article class="project-card">
+          <h2>Stack technique</h2>
+          <ul id="project-tech"></ul>
+        </article>
+
+        <article class="project-card">
+          <h2>Compétences mobilisées</h2>
+          <ul id="project-skills"></ul>
+        </article>
+
+        <article class="project-card">
+          <h2>Captures & visuels</h2>
+          <div class="project-gallery" id="project-gallery"></div>
+        </article>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    const PROJECTS = {
+      "data-catalog": {
+        title: "EDA — Catalogue streaming",
+        category: "Data & analyse",
+        year: "2025",
+        description: "Analyse exploratoire d'un catalogue de contenus (films/séries) : volume dans le temps, répartition des types, top genres et qualité des colonnes via heatmap de complétude.",
+        tech: ["Python", "Pandas", "NumPy", "Matplotlib", "Seaborn", "Jupyter Notebook"],
+        skills: ["Data cleaning", "Agrégations", "Visualisation", "Lecture métier des résultats"],
+        images: [
+          "./img/01_volume_par_annee.png",
+          "./img/02_repartition_type_contenu.png",
+          "./img/03_top_genres.png",
+          "./img/05_heatmap_completude.png"
+        ]
+      },
+      "ecommerce-dashboard": {
+        title: "Performance e-commerce",
+        category: "Data & dashboard",
+        year: "2025",
+        description: "Dashboard interactif Streamlit pour analyser plus de 2,7M événements : KPI, funnel, tendances temporelles, produits performants, activité horaire et comportements utilisateurs.",
+        tech: ["Python", "Pandas", "Streamlit", "Plotly"],
+        skills: ["KPI", "Funnel de conversion", "Analyse comportementale", "Data storytelling"],
+        images: [
+          "./img/ecommerce/ecom-tableau-de-bord-kpi.png",
+          "./img/ecommerce/ecom-funnel-conversion.png",
+          "./img/ecommerce/ecom-heatmap-heure-jour.png",
+          "./img/ecommerce/ecom-meilleurs-produits.png"
+        ]
+      },
+      "homedoc-web": {
+        title: "HomeDoc Web",
+        category: "Développement web",
+        year: "2025",
+        description: "Développement d'une interface web métier pour le projet HomeDoc : gestion, tableaux de bord, intégration API et pages orientées usage.",
+        tech: ["HTML", "CSS", "JavaScript", "PHP", "MySQL", "API REST"],
+        skills: ["Conception front-end", "Back-end", "Intégration API", "Responsive"],
+        images: [
+          "./img/homedocweb1.png",
+          "./img/medecin1.png",
+          "./img/medecin2.png"
+        ]
+      },
+      "cbace-cga": {
+        title: "CBACE-CGA",
+        category: "Refonte graphique & web",
+        year: "2025",
+        description: "Refonte visuelle et UX du site CBACE-CGA pour améliorer la lisibilité, la navigation et l'image professionnelle.",
+        tech: ["HTML5", "CSS3", "JavaScript", "WordPress"],
+        skills: ["Refonte UI", "UX", "Mise en page responsive", "Structuration contenu"],
+        images: [
+          "./img/cbace-1.svg",
+          "./img/cbace-2.svg",
+          "./img/cbace-3.svg",
+          "./img/cbace-4.svg"
+        ]
+      },
+      "homedoc-app": {
+        title: "HomeDoc App",
+        category: "Application mobile",
+        year: "2025",
+        description: "Application mobile de suivi médical : création de compte, rendez-vous, suivi des consultations et ordonnances.",
+        tech: ["Flutter", "Dart", "PHP", "MySQL", "API REST"],
+        skills: ["Mobile app", "Architecture client/serveur", "Sécurisation parcours utilisateur"],
+        images: [
+          "./img/homedoc.png",
+          "./img/connexionapplication.png",
+          "./img/homedoc1.png",
+          "./img/homedoc3.png"
+        ]
+      },
+      "secca-sarl": {
+        title: "Refonte du site Secca Sarl",
+        category: "Développement web",
+        year: "2024",
+        description: "Refonte complète du site Secca Sarl sous WordPress avec objectif de modernisation, meilleure expérience utilisateur et performance.",
+        tech: ["WordPress", "HTML5", "CSS3", "JavaScript"],
+        skills: ["Refonte graphique", "Optimisation performance", "Responsive", "Gestion de contenu"],
+        images: [
+          "./img/secca sarl2.png",
+          "./img/secca sarl 1.png",
+          "./img/secca sarl 3.png"
+        ]
+      },
+      "drive-ease-maquette": {
+        title: "Drive Ease — Maquette UI/UX",
+        category: "Design produit",
+        year: "2025",
+        description: "Maquette Figma d'une application d'apprentissage du code de la route avec une approche ergonomique et orientée progression utilisateur.",
+        tech: ["Figma", "Prototype interactif", "Wireframing", "UX research"],
+        skills: ["Design UI", "Conception UX", "Parcours utilisateur", "Prototype"],
+        images: [
+          "./img/maquettedrivease1.jpg",
+          "./img/maquettedrivease2.jpg",
+          "./img/maquettedrivease3.jpg",
+          "./img/maquettedrivease4.jpg"
+        ]
+      },
+      "drive-ease-app": {
+        title: "Drive Ease — Application mobile",
+        category: "Application mobile",
+        year: "2025",
+        description: "Application mobile de préparation au permis avec authentification, contenus pédagogiques, examens blancs et suivi temps réel via Firebase.",
+        tech: ["Flutter", "Dart", "Firebase Authentication", "Cloud Firestore", "Firebase Storage"],
+        skills: ["Développement mobile", "Temps réel", "Gestion authentification", "UX apprentissage"],
+        images: [
+          "./img/driveease1.png",
+          "./img/driveease2.png",
+          "./img/driveease3.png",
+          "./img/driveease4.png"
+        ]
+      }
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+    const project = PROJECTS[id];
+
+    const head = document.getElementById("project-head");
+    const description = document.getElementById("project-description");
+    const tech = document.getElementById("project-tech");
+    const skills = document.getElementById("project-skills");
+    const gallery = document.getElementById("project-gallery");
+
+    if (!project) {
+      head.innerHTML = "<h1>Projet introuvable</h1><p>Le lien ne correspond à aucun projet. Retournez au portfolio pour sélectionner un projet valide.</p>";
+    } else {
+      document.title = project.title + " | Projet";
+      head.innerHTML = `
+        <h1>${project.title}</h1>
+        <p>${project.description}</p>
+        <div class="project-meta">
+          <span class="project-pill">${project.category}</span>
+          <span class="project-pill">Année : ${project.year}</span>
+        </div>
+      `;
+      description.textContent = project.description;
+
+      tech.innerHTML = project.tech.map((item) => `<li>${item}</li>`).join("");
+      skills.innerHTML = project.skills.map((item) => `<li>${item}</li>`).join("");
+      gallery.innerHTML = project.images.map((img, index) =>
+        `<img src="${img}" loading="lazy" alt="${project.title} - visuel ${index + 1}">`
+      ).join("");
+    }
+  </script>
+</body>
+</html>

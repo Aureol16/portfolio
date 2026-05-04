@@ -183,9 +183,11 @@ function tabsFilters() {
 tabsFilters()
 
 function showProjectDetails() {
-  const links = document.querySelectorAll('.card__link');
+  const links = document.querySelectorAll('.card__link[data-id]');
   const modals = document.querySelectorAll('.modal');
   const btns = document.querySelectorAll('.modal__close');
+
+  if (!links.length) return;
 
   const hideModals = () => {
     modals.forEach((modal) => {

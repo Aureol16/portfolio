@@ -1434,14 +1434,14 @@ section {
 }
 
 .portfolio-list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 2rem;
 }
 
 .portfolio .portfolio-list > .grid__item {
-  flex: 1 1 100%;
   max-width: 100%;
+  width: 100%;
 }
 
 .portfolio .portfolio-item {
@@ -1541,36 +1541,34 @@ section {
 }
 
 /* Portfolio — cartes en ligne (aperçu + texte) */
-.card.card--row {
-  display: grid;
-  grid-template-columns: minmax(160px, 280px) 1fr;
-  align-items: stretch;
+.card.card--project {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   text-transform: none;
-  gap: 0;
 }
 
-.card.card--row .card__thumb {
+.card.card--project .card__thumb {
   width: 100%;
-  height: 100%;
-  min-height: 200px;
-  max-height: 320px;
+  height: 230px;
   object-fit: cover;
   object-position: center;
-  border-radius: 12px 0 0 12px;
+  border-radius: 12px 12px 0 0;
   margin: 0;
 }
 
-.card.card--row .card__inner {
+.card.card--project .card__inner {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: center;
-  padding: 2rem 2.4rem;
+  justify-content: flex-start;
+  padding: 2rem;
   text-align: left;
+  height: 100%;
 }
 
-.card.card--row .card__title,
-.card.card--row .category {
+.card.card--project .card__title,
+.card.card--project .category {
   text-transform: none;
 }
 
@@ -1602,7 +1600,7 @@ section {
   letter-spacing: 0;
 }
 
-.card.card--row .card__link.btn {
+.card__page-link.btn {
   margin-top: auto;
   text-decoration: none;
   text-transform: none;
@@ -1615,17 +1613,11 @@ section {
 }
 
 @media screen and (max-width: 699px) {
-  .card.card--row {
-    grid-template-columns: 1fr;
+  .card.card--project .card__thumb {
+    height: 210px;
   }
 
-  .card.card--row .card__thumb {
-    min-height: 200px;
-    max-height: 240px;
-    border-radius: 12px 12px 0 0;
-  }
-
-  .card.card--row .card__inner {
+  .card.card--project .card__inner {
     padding: 2rem 1.8rem;
   }
 }
@@ -1872,6 +1864,7 @@ section {
 
 @media screen and (min-width: 750px) {
   .portfolio-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 2.4rem;
   }
 
@@ -1881,6 +1874,12 @@ section {
 
   .modal .grid__item {
     max-width: 50%;
+  }
+}
+
+@media screen and (min-width: 1150px) {
+  .portfolio-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
