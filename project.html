@@ -14,7 +14,7 @@
     }
 
     .project-shell {
-      max-width: 1040px;
+      max-width: min(1200px, 96vw);
       margin: 0 auto;
     }
 
@@ -75,18 +75,23 @@
     }
 
     .project-gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
     }
 
     .project-gallery img {
+      display: block;
       width: 100%;
-      height: 180px;
-      object-fit: cover;
+      max-width: 100%;
+      height: auto;
+      max-height: min(92vh, 980px);
+      object-fit: contain;
+      object-position: center top;
       border-radius: 12px;
       border: 1px solid var(--border-color);
-      box-shadow: var(--shadow-sm);
+      box-shadow: var(--shadow-md);
+      background: rgba(15, 23, 42, 0.4);
     }
   </style>
 </head>
@@ -174,10 +179,11 @@
         tech: ["HTML5", "CSS3", "JavaScript", "WordPress"],
         skills: ["Refonte UI", "UX", "Mise en page responsive", "Structuration contenu"],
         images: [
-          "./img/cbace-1.svg",
-          "./img/cbace-2.svg",
-          "./img/cbace-3.svg",
-          "./img/cbace-4.svg"
+          "./img/CBACE 1.png",
+          "./img/CBACE2.png",
+          "./img/CBACE 3 (1).png",
+          "./img/CBACE 3 (2).png",
+          "./img/CBACE 3 (3).png"
         ]
       },
       "homedoc-app": {
@@ -264,7 +270,7 @@
       tech.innerHTML = project.tech.map((item) => `<li>${item}</li>`).join("");
       skills.innerHTML = project.skills.map((item) => `<li>${item}</li>`).join("");
       gallery.innerHTML = project.images.map((img, index) =>
-        `<img src="${img}" loading="lazy" alt="${project.title} - visuel ${index + 1}">`
+        `<img src="${encodeURI(img)}" loading="lazy" alt="${project.title} - visuel ${index + 1}">`
       ).join("");
     }
   </script>
