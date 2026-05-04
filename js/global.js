@@ -384,19 +384,21 @@ const observerIntersectionAnimation = () => {
     itemObserver.observe(item);
   });
 
-  // Effet de scroll sur le header
+  // Effet de scroll sur le header (pages sans .header, ex. project.html : ne rien faire)
   let lastScroll = 0;
-  window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
-    
-    if (currentScroll > 100) {
-      header.classList.add('scrolled');
-    } else {
-      header.classList.remove('scrolled');
-    }
-    
-    lastScroll = currentScroll;
-  });
+  if (header) {
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
+
+      if (currentScroll > 100) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+
+      lastScroll = currentScroll;
+    });
+  }
 }
 
 observerIntersectionAnimation();
@@ -448,13 +450,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /* Thème clair / sombre — interrupteur (sombre par défaut) */
 function initThemeToggle() {
-  const switches = document.querySelectorAll('[data-theme-toggle]');
   const root = document.documentElement;
 
   const isLight = () => root.getAttribute('data-theme') === 'light';
 
   const syncSwitches = (light) => {
-    switches.forEach((el) => {
+    document.querySelectorAll('[data-theme-toggle]').forEach((el) => {
       el.setAttribute('aria-checked', light ? 'true' : 'false');
       el.setAttribute('aria-label', light ? 'Passer en mode sombre' : 'Passer en mode clair');
     });
@@ -475,9 +476,17 @@ function initThemeToggle() {
     syncSwitches(light);
   };
 
-  switches.forEach((el) => {
-    el.addEventListener('click', () => apply(!isLight()));
-  });
+  // Délégation en phase capture : fonctionne même si un calque capte le clic avant le bouton
+  document.addEventListener(
+    'click',
+    (e) => {
+      const el = e.target && e.target.closest && e.target.closest('[data-theme-toggle]');
+      if (!el) return;
+      e.preventDefault();
+      apply(!isLight());
+    },
+    true
+  );
 
   try {
     apply(localStorage.getItem('portfolio-theme') === 'light');

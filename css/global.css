@@ -489,6 +489,9 @@ section#contact {
   display: flex;
   align-items: center;
   gap: 1rem;
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
 }
 
 /* Social Icons - Visible and Styled */
@@ -612,6 +615,7 @@ section#contact {
     background: var(--background-body);
     transition: all 0.4s ease-out;
     box-shadow: var(--shadow-lg);
+    pointer-events: none;
   }
 
   nav .menu li {
@@ -635,6 +639,7 @@ section#contact {
     width: 100%;
     left: 0;
     z-index: 999;
+    pointer-events: auto;
   }
 
   .show-nav nav li a:hover {
@@ -2138,6 +2143,9 @@ footer .socials a:hover {
   background: transparent;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  position: relative;
+  z-index: 1;
 }
 
 .theme-switch:focus-visible {
@@ -2234,6 +2242,11 @@ html[data-theme="light"] .theme-switch[aria-checked="true"] .theme-switch__thumb
 
 .project-topbar .project-back {
   margin-bottom: 0;
+}
+
+.project-topbar .header__theme {
+  position: relative;
+  z-index: 2;
 }
 
 html[data-theme="light"] {
